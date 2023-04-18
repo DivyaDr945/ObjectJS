@@ -61,8 +61,6 @@ console.log(o);
 console.log(o1);
 console.log(o2);
 
-/*Object.assign()*/
-
 /*
 1.Object.assign()	This method is used to copy enumerable and own properties from a source object to a target object
 2	Object.create()	This method is used to create a new object with the specified prototype object and properties.
@@ -85,3 +83,55 @@ console.log(o2);
 19	Object.setPrototypeOf()	This method sets the prototype of a specified object to another object.
 20	Object.values()	This method returns an array of values.
 */
+
+/*Object.assign()
+Object.assign() does not throw on null or undefined sources.
+*/
+
+const target = { a: 1, b: 2, e: 6 };
+const source = { b: 4, c: 5 };
+const returnedTarget = Object.assign(target, source);
+console.log(returnedTarget);
+console.log(returnedTarget == target);
+
+/*Object.create() */
+const personobjcreate = {
+  isHuman: false,
+  printIntroduction: function () {
+    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+  },
+};
+
+const meobjcreate = Object.create(personobjcreate);
+meobjcreate.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+meobjcreate.isHuman = true; // Inherited properties can be overwritten
+meobjcreate.printIntroduction();
+
+/*Object.defineProperty() 
+Object.defineProperty(obj, prop, descriptor)
+obj The object on which to define the property.
+prop  A string or Symbol specifying the key of the property to be defined or modified.
+descriptor The descriptor for the property being defined or modified.
+The object that was passed to the function, with the specified property added or modified
+*/
+const object1 = {};
+
+Object.defineProperty(object1, 'property1', {
+  value: 42,
+  writable: false,
+});
+//object1.property1 = 77; // Throws an error in strict mode
+console.log(object1.property1); // Expected output: 42
+/*Object.defineProperties()  */
+const objectdefineproperties = {};
+
+Object.defineProperties(objectdefineproperties, {
+  property1: {
+    value: 55,
+    writable: true,
+  },
+  property2: {},
+});
+
+console.log(objectdefineproperties.property1, objectdefineproperties.property2);
+// Expected output: 42
